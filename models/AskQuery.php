@@ -1,0 +1,43 @@
+<?php
+
+namespace app\models;
+
+/**
+ * This is the ActiveQuery class for [[Ask]].
+ *
+ * @see Ask
+ */
+class AskQuery extends \yii\db\ActiveQuery
+{
+    /*public function active()
+    {
+        return $this->andWhere('[[status]]=1');
+    }*/
+
+    /**
+     * @inheritdoc
+     * @return Ask[]|array
+     */
+    public function all($db = null)
+    {
+        return parent::all($db);
+    }
+
+    /**
+     * @inheritdoc
+     * @return Ask|array|null
+     */
+    public function one($db = null)
+    {
+        return parent::one($db);
+    }
+
+    /**
+     * @param $id
+     * @return $this
+     */
+    public function byId($id = null)
+    {
+        return $this->andWhere('[[id]]=' . $id);
+    }
+}

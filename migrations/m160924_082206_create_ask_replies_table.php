@@ -20,6 +20,8 @@ class m160924_082206_create_ask_replies_table extends Migration
         ], 'ENGINE=InnoDb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT \'Таблица с ответами на вопросы\'');
 
         $this->createIndex('ask_reply_index', '{{%ask_replies}}', ['ask_id', 'reply_id'], true);
+        $this->addForeignKey('FK_ask_replies_ask', '{{%ask_replies}}', 'ask_id', '{{%ask}}', 'id');
+        $this->addForeignKey('FK_ask_replies_reply', '{{%ask_replies}}', 'reply_id', '{{%reply}}', 'id');
     }
 
     /**

@@ -21,6 +21,8 @@ class m160924_081512_create_reply_table extends Migration
 
         $this->createIndex('user_id_index', '{{%reply}}', 'user_id');
         $this->createIndex('quest_id_index', '{{%reply}}', 'quest_id');
+        $this->addForeignKey('FK_reply_user', '{{%reply}}', 'user_id', '{{%user}}', 'id');
+        $this->addForeignKey('FK_reply_quests', '{{%reply}}', 'quest_id', '{{%quests}}', 'id');
     }
 
     /**

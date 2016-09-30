@@ -21,6 +21,7 @@ class m160924_081007_create_ask_table extends Migration
 
         $this->createIndex('quest_id_index', '{{%ask}}', 'quest_id');
         $this->createIndex('label_index', '{{%ask}}', 'label');
+        $this->addForeignKey('FK_ask_quest', '{{%ask}}', 'quest_id', '{{%quests}}', 'id');
     }
 
     /**

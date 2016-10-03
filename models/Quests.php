@@ -67,6 +67,31 @@ class Quests extends \yii\db\ActiveRecord
     }
 
     /**
+     * @param $asks
+     */
+    /*public function setAsks($asks)
+    {
+        $this->populateRelation('asks', $asks);
+    }*/
+
+
+    /**
+     * @param bool $true
+     * @param array $changedAttributes
+     */
+   /* public function afterSave($true, $changedAttributes)
+    {
+        parent::afterSave($true, $changedAttributes);
+
+        $relatedRecords = $this->getRelatedRecords();
+        if (isset($relatedRecords['asks'])) {
+            foreach ($relatedRecords['asks'] as $ask) {
+                $this->link('asks', $ask);
+            }
+        }
+    }*
+
+    /**
      * @inheritdoc
      * @return QuestsQuery the active query used by this AR class.
      */

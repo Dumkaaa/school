@@ -4,7 +4,7 @@ namespace app\modules\admin\controllers;
 
 use app\models\Ask;
 use Yii;
-use app\modules\admin\models\Quests;
+use app\models\Quests;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -52,8 +52,11 @@ class QuestsController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $asks = $model->asks;
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'asks' => $asks,
         ]);
     }
 
@@ -86,24 +89,30 @@ class QuestsController extends Controller
         $model = $this->findModel($id);
         $asks = $model->asks;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $post = Yii::$app->request->post();
+        $post = Yii::$app->request->post();
+
+        if ($model->load($post) && $model->validate()) {
+
+            $post_asks = null;
+
             foreach ($post['Ask'] as $post_ask) {
+
                 if(!isset($post_ask['id'])) {
                     $ask = new Ask();
                 }
                 else {
                     $ask = Ask::findOne($post_ask['id']);
                 }
-                $ask->load($post_ask, '');
-                $ask->quest_id = $model->id;
-                $ask->save();
-                //$model->link('asks', $ask);
 
+                $ask->load($post_ask, '');
+                $model->link('asks', $ask);
             }
 
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+            $model->save();
+
+            return $this->redirect(['index']);
+        }
+        else {
             return $this->render('update', [
                 'model' => $model,
                 'asks' => $asks,
@@ -122,15 +131,6 @@ class QuestsController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
-
-    /**
-     * Просмотр
-     *
-     * @return string
-     */
-    public function actionViewone($id)
-    {
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\admin\models;
+namespace app\modules\admin;
 
 /**
  * This is the ActiveQuery class for [[Quests]].

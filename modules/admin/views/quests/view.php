@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -25,14 +26,23 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title',
-            'description',
-            'active',
-        ],
-    ]) ?>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Вопросы</div>
+        <?php if (empty($asks)): ?>
+            <div class="panel-body">
+                <p>Активных анкет не найдено</p>
+            </div>
+        <?php else: ?>
+            <!-- List group -->
+            <ul class="list-group">
+                <?php foreach ($asks as $key => $ask): ?>
+                    <li class="list-group-item">
+                        <?php echo Html::encode($ask->label); ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+    </div>
 
 </div>

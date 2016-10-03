@@ -24,15 +24,28 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'title')
+        ->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'description')
+        ->textarea(['rows' => 3]) ?>
 
-    <?= $form->field($model, 'active')->textInput() ?>
+    <?= $form->field($model, 'active')
+        ->checkbox() ?>
+
+
     <?php foreach ($asks as $key => $ask): ?>
-        <?= $form->field($ask, "[$key]id")->hiddenInput()->label(false) ?>
-        <?= $form->field($ask, "[$key]label")->textInput() ?>
-        <?= $form->field($ask, "[$key]type")->textInput() ?>
+        <?= $form->field($ask, "[$key]id")
+            ->hiddenInput()
+            ->label(false)
+        ?>
+        <?= $form->field($ask, "[$key]label")
+            ->textarea(['rows' => 2])
+        ?>
+        <?= $form->field($ask, "[$key]type")
+            ->hiddenInput()
+            ->label(false)
+        ?>
     <?php endforeach; ?>
 
     <div class="form-group">

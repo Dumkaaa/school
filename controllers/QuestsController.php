@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Quests;
-use app\models\QuestsSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,11 +35,11 @@ class QuestsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new QuestsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Quests::find(),
+        ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

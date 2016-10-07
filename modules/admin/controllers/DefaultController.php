@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use yii\web\Controller;
 use yii\filters\AccessControl;
+use yii\data\ArrayDataProvider;
 /**
  * Default controller for the `admin` module
  */
@@ -15,7 +16,27 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $menu = [
+            ['label' => 'Анкеты', 'url' => ['quests/index']],
+            ['label' => 'Вопросы', 'url' => ['ask/index']],
+            ['label' => 'Ответы', 'url' => ['ask_replies/index']],
+            ['label' => 'Пользователи', 'url' => ['user/index']],
+        ];
+
+        $dataProvider = new ArrayDataProvider([
+            'key'        => 'id',
+            'allModels'  => $menu,
+            'sort'       => [
+                'attributes' => ['label', 'url'],
+            ],
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

@@ -26,10 +26,10 @@ $I->see('The verification code is incorrect');
 
 $I->amGoingTo('submit contact form with not correct email');
 $contactPage->submit([
-    'name' => 'tester',
-    'email' => 'tester.email',
-    'subject' => 'test subject',
-    'body' => 'test content',
+    'name'       => 'tester',
+    'email'      => 'tester.email',
+    'subject'    => 'test subject',
+    'body'       => 'test content',
     'verifyCode' => 'testme',
 ]);
 if (method_exists($I, 'wait')) {
@@ -44,10 +44,10 @@ $I->dontSee('The verification code is incorrect', '.help-inline');
 
 $I->amGoingTo('submit contact form with correct data');
 $contactPage->submit([
-    'name' => 'tester',
-    'email' => 'tester@example.com',
-    'subject' => 'test subject',
-    'body' => 'test content',
+    'name'       => 'tester',
+    'email'      => 'tester@example.com',
+    'subject'    => 'test subject',
+    'body'       => 'test content',
     'verifyCode' => 'testme',
 ]);
 if (method_exists($I, 'wait')) {
